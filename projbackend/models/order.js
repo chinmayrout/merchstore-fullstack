@@ -14,7 +14,7 @@
     
     
     const orderSchema = new mongoose.Schema({
-    products: [ProductCartSchema],
+    products: [ProductCartSchema],  //diffrenet from product as it is cart-items
     transaction_id: {},
     amount: {type: Number},
     address: String,

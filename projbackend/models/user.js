@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 const crypto = require('crypto');
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid'); //uuid:generates unique id for hashing password
 
 var userSchema = new mongoose.Schema({
     name:   {
@@ -28,9 +28,9 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    salt:   String,
+    salt:   String,         //cryptography - hashing passwords
     role:   {
-        type:   Number,     //userlevel-priviledge
+        type:   Number,     //userlevel-priviledge - higher number higher priviledge
         default: 0
     },
     purchases:  {
@@ -40,7 +40,7 @@ var userSchema = new mongoose.Schema({
 
 }, {timestamps: true});     //updates when the schema is inserted; https://mongoosejs.com/docs/guide.html#timestamps
 
-userSchema.virtual("password")      //creating virtuals
+userSchema.virtual("password")      //creating virtuals- kind of getter/setter
     .set(function(password){        //setter
         this._password = password       //underscore for private variable
         this.salt = uuidv4();       //populate using uuid
@@ -55,7 +55,7 @@ userSchema.method = {
         return this.securePassword(plainpassword) === this.encry_password
     },
 
-    securePassword: function(plainpassword){
+    securePassword: function(plainpassword){        //method to create password
         if(!password) return "";
         try{
             return crypto.createHmac('sha256', this.salt)   //look up in  node js crypto documentation
