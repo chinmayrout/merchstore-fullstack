@@ -4,9 +4,21 @@ const app = express();
 
 const port = 8000;
 
-app.get("/", (req, res) => {
-  return res.send("Home Page!");
-});
+const home = (req, res) => {  //variable to send into / route
+  return res.send("Home Dashboard!a");
+};
+
+const isHome = (req, res, next) => {    //check next - middleware
+  console.log("isHome is running");
+  next();
+} 
+
+const isLoggedIn = (req, res, next) => {
+  console.log("isLogged?");
+  next();
+}
+
+app.get("/", isLoggedIn, isHome, home);
 
 app.get("/login", (req, res) => {
   return res.send("You are visiting Login Route!");
