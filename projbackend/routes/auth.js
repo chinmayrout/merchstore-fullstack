@@ -7,4 +7,4 @@ const {signout, signup} = require("../controllers/auth")    //{} contains method
 router.post("/signup", signup)
 router.get("/signout", signout)
 
-module.exports = router 
+module.exports = router
