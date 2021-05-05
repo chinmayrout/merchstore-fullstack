@@ -50,13 +50,13 @@ userSchema.virtual("password")      //creating virtuals- kind of getter/setter
         return this._password
     })
 
-userSchema.method = {
+userSchema.methods = {  //use methods not method
     authenticate: function(plainpassword){
         return this.securePassword(plainpassword) === this.encry_password
     },
 
     securePassword: function(plainpassword){        //method to create password
-        if(!password) return "";
+        if(!plainpassword) return "";   //pass the parameter
         try{
             return crypto.createHmac('sha256', this.salt)   //look up in  node js crypto documentation
                    .update(plainpassword)
