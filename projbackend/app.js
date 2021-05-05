@@ -10,7 +10,7 @@ const authRoutes = require("./routes/auth.js")   // ./ means home directory
 
 //DB Connection
 mongoose.connect(
-  process.env.DATABASE, //can use online database from atlas or anything
+  process.env.DATABASE, //can use online database from atlas or anything - made a database and using it
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true } //to keep database alive 
 ).then(() => {          //then - catch is somewhat like trycatch
     console.log("DB Connected!");
