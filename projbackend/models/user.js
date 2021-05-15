@@ -58,15 +58,14 @@ userSchema.methods = {  //use methods not method
     securePassword: function(plainpassword){        //method to create password
         if(!plainpassword) return "";   //pass the parameter
         try{
-            return crypto.createHmac('sha256', this.salt)   //look up in  node js crypto documentation
+            return crypto
+                   .createHmac('sha256', this.salt)   //look up in  node js crypto documentation
                    .update(plainpassword)
-                   .digest('hex');
-
-        }catch(err){
+                   .digest('hex'); 
+        }catch (err){
             return "";
         }
     }
-}
-
+};
 
 module.exports = mongoose.model("User", userSchema);

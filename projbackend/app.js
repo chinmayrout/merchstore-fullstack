@@ -6,7 +6,10 @@ const app = express();
 const bodyParser = require('body-parser')
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
+
+//My Routes
 const authRoutes = require("./routes/auth.js")   // ./ means home directory
+const userRoutes = require("./routes/user.js")
 
 //DB Connection
 mongoose.connect(
@@ -26,6 +29,7 @@ app.use(cors());
 
 //My Routes
 app.use("/api", authRoutes)   //Mounts the specified middleware function or functions at the specified path
+app.use("/api", userRoutes)
 
 
 //Ports
