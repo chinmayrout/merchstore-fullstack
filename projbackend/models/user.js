@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 const crypto = require("crypto");
-const { v4: uuidv4 } = require("uuid/v1"); //uuid:generates unique id for hashing password
+const uuidv1 = require("uuid/v1"); //uuid:generates unique id for hashing password
 
 var userSchema = new mongoose.Schema(
   {
@@ -47,7 +47,7 @@ userSchema
   .set(function (password) {
     //setter
     this._password = password; //underscore for private variable
-    this.salt = uuidv4(); //populate using uuid
+    this.salt = uuidv1(); //populate using uuid
     this.encry_password = this.securePassword(password);
   })
   .get(function () {
@@ -61,7 +61,7 @@ userSchema.methods = {
     return this.securePassword(plainpassword) === this.encry_password;
   },
 
-  securePassword: function (plainpassword) {
+  securePassword: function(plainpassword) {
     //method to create password
     if (!plainpassword) return ""; //pass the parameter
     try {

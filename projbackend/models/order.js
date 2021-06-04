@@ -8,7 +8,7 @@ const ProductCartSchema = new mongoose.Schema({
   },
   name: String,
   count: Number,
-  price: Number,
+  price: Number
 });
 const ProductCart = mongoose.model("ProductCart", ProductCartSchema);
 
@@ -21,7 +21,7 @@ const orderSchema = new mongoose.Schema(
     updated: Date,
     user: {
       type: ObjectId,
-      ref: "User", //whenever mention type, put ref
+      ref: "User" //whenever mention type, put ref
     }
   },
   { timestamps: true }

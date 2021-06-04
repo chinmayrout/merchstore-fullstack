@@ -8,8 +8,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 //My Routes
-const authRoutes = require("./routes/auth.js"); // ./ means one directory back
-const userRoutes = require("./routes/user.js");
+const authRoutes = require("./routes/auth"); // ./ means one directory back
+const userRoutes = require("./routes/user");
 
 //DB Connection
 mongoose
@@ -20,13 +20,13 @@ mongoose
   .then(() => {
     //then - catch is somewhat like trycatch
     console.log("DB Connected!");
-  })
-  .catch(() => {
-    console.log("DB not Connected!");
   });
+  // .catch(() => {
+  //   console.log("DB not Connected!");
+  // });
 
 //Middleware
-app.use(bodyParser.json)
+app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(cors());
 

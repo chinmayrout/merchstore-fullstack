@@ -10,7 +10,7 @@ exports.signup = (req, res) => {
   if (!errors.isEmpty()) {
     //errors not error
     return res.status(422).json({
-      error: errors.array()[0].msg,
+      error: errors.array()[0].msg
     });
   }
 
@@ -19,10 +19,11 @@ exports.signup = (req, res) => {
     //using mongoose
     if (err) {
       return res.status(400).json({
-        err: "NOT Able to save user in DB",
+        err: "NOT Able to save user in DB"
       });
     }
     res.json({
+      // message: "Signup Route works",
       //adding to the database
       name: user.name, //adding name
       email: user.email, //adding email
@@ -30,7 +31,7 @@ exports.signup = (req, res) => {
     });
   });
 
-  // console.log("REQ BODY", req.body)        //not required
+  //  console.log("REQ BODY", req.body)        //not required
   // res.json({
   //     message: "Signup route works"
   // })
@@ -42,9 +43,10 @@ exports.signin = (req, res) => {
 
   if (!errors.isEmpty()) {
     return res.status(422).json({
-      error: errors.array()[0].msg,
+      error: errors.array()[0].msg
     });
   }
+  //Checking if user details in the
   User.findOne({ email }, (err, user) => {
     //findone is mongoose method
     if (err || !user) {
@@ -56,7 +58,7 @@ exports.signin = (req, res) => {
 
     if (!user.authenticate(password)) {
       //from User
-      res.status(401).json({
+      return res.status(401).json({
         error: "Email and Password do not match",
       });
     }
@@ -84,7 +86,7 @@ exports.signout = (req, res) => {
 //protected routes
 exports.isSignedIn = expressJwt({
   secret: process.env.SECRET,
-  userProperty: "auth",
+  userProperty: "auth"
 });
 
 //custom middlewates
@@ -101,7 +103,7 @@ exports.isAuthenticated = (req, res, next) => {
 exports.isAdmin = (req, res, next) => {
   if (req.profile.role === 0) {
     return res.status(403).json({
-      error: "You are not ADMIN! Access Denied!",
+      error: "You are not ADMIN! Access Denied!"
     });
   }
   next(); //super important in middleware

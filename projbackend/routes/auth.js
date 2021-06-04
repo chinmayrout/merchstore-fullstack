@@ -8,7 +8,7 @@ router.post(
   [
     check("name", "name should be atleast 3 char").isLength({ min: 3 }), //express validation
     check("email", "email is required").isEmail(), //signup validation
-    check("password", "Password should be atleast 3 char").isLength({ min: 3 }),
+    check("password", "Password should be atleast 3 char").isLength({ min: 3 })
   ],
   signup
 ); //for post request use postman
@@ -19,7 +19,7 @@ router.post(
     //post call because taking input from the user
 
     check("email", "email is required").isEmail(),
-    check("password", "Password field is required").isLength({ min: 1 }),
+    check("password", "Password field is required").isLength({ min: 1 })
   ],
   signin //for post request use postman and don't forget to include signin from controller to routes
 );
