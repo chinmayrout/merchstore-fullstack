@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 //My Routes
-const authRoutes = require("./routes/auth.js"); // ./ means home directory
+const authRoutes = require("./routes/auth.js"); // ./ means one directory back
 const userRoutes = require("./routes/user.js");
 
 //DB Connection
@@ -26,8 +26,7 @@ mongoose
   });
 
 //Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); //check here
+app.use(bodyParser.json)
 app.use(cookieParser());
 app.use(cors());
 

@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 const crypto = require("crypto");
-const { v4: uuidv4 } = require("uuid"); //uuid:generates unique id for hashing password
+const { v4: uuidv4 } = require("uuid/v1"); //uuid:generates unique id for hashing password
 
 var userSchema = new mongoose.Schema(
   {

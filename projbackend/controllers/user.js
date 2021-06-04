@@ -16,4 +16,5 @@ exports.getUserById = (req, res, next, id) => {
 exports.getUser = (req, res) => {
   //TODO: get back for password
   return res.json(req.profile);
+  
 };

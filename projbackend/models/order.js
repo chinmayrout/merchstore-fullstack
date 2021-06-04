@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema(
     user: {
       type: ObjectId,
       ref: "User", //whenever mention type, put ref
-    },
+    }
   },
   { timestamps: true }
 );

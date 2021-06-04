@@ -26,7 +26,7 @@ exports.signup = (req, res) => {
       //adding to the database
       name: user.name, //adding name
       email: user.email, //adding email
-      id: user._id, //adding id
+      id: user._id //adding id
     });
   });
 
@@ -104,5 +104,5 @@ exports.isAdmin = (req, res, next) => {
       error: "You are not ADMIN! Access Denied!",
     });
   }
-  next(); //super importatn in middleware
+  next(); //super important in middleware
 };

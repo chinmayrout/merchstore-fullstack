@@ -9,35 +9,35 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      maxlength: 32,
+      maxlength: 32
     },
     description: {
       type: String,
       trim: true,
       required: true,
-      maxlength: 2000,
+      maxlength: 2000
     },
     price: {
       type: Number,
       required: true,
       maxlength: 32,
-      trim: true,
+      trim: true
     },
     category: {
       type: ObjectId,
       ref: "Category", //where the taking the things from (linked from previous defined schema)
-      required: true,
+      required: true
     },
     stock: {
       type: Number,
     },
     sold: {
       type: Number,
-      default: 0,
+      default: 0
     },
     photo: {
       data: buffer, //photo stored in buffer
-      contentType: String,
+      contentType: String
     },
   },
   { timestamps: true }
