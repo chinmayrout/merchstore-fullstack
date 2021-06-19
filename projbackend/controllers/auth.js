@@ -47,7 +47,7 @@ exports.signin = (req, res) => {
     });
   }
   //Checking if user details in the
-  User.findOne({ email }, (err, user) => {
+  User.findOne({ email }, (err, user) => {    //taking from models/user.js
     //findone is mongoose method
     if (err || !user) {
       //or adding USER doesn't exist
