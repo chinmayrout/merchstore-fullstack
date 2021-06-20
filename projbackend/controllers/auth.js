@@ -1,6 +1,6 @@
 //route-file name is same as controller-file
 const User = require("../models/user.js"); //recommmnd to name the variable after what u throw in user.js end
-const { check, validationResult } = require("express-validator"); //from express validation documentation
+const { body, validationResult } = require("express-validator"); //from express validation documentation
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
@@ -86,15 +86,16 @@ exports.signout = (req, res) => {
 //protected routes
 exports.isSignedIn = expressJwt({
   secret: process.env.SECRET,
+  algorithms: ['HS256'],
   userProperty: "auth"
 });
 
 //custom middlewates
 exports.isAuthenticated = (req, res, next) => {
-  let checker = req.profile && req.auth && req.profile._id == req.auth._id; //to check front end && top middleware && profile_id === auth_id
+  let checker = req.profile && req.auth && req.auth._id == req.profile._id; //to check front end && top middleware && profile_id === auth_id
   if (!checker) {
     return res.status(403).json({
-      error: "ACCESS DENIED", //if anything is not true; acess id denied
+      error: "ACCESS DENIED" //if anything is not true; acess id denied
     });
   }
   next();

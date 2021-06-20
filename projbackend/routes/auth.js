@@ -26,8 +26,8 @@ router.post(
 
 router.get("/signout", signout);
 
-// router.get("/testroute", isSignedIn, (req, res) => {    //next not required in this middleware as using expressJwt
-//     res.json(req.auth);
-// })
+router.get("/testroute", isSignedIn, (req, res) => {    //next not required in this middleware as using expressJwt
+    res.json(req.auth);
+})
 
 module.exports = router;

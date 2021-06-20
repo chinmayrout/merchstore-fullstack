@@ -11,7 +11,7 @@ const categorySchema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-); //used to record time for entry
+) //used to record time for entry
 //updates when the schema is inserted; https://mongoosejs.com/docs/guide.html#timestamps
 
 module.exports = mongoose.model("Category", categorySchema);
