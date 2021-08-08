@@ -36,7 +36,7 @@ exports.getUser = (req, res) => {
 exports.updateUser = (req, res) => {
   User.findByIdAndUpdate(
     { _id: req.profile._id },
-    { $set: req.body },
+    { $set: req.body }, //updating part in $set
     { new: true, useFindAndModify: false },
     (err, user) => {
       //call-back
@@ -53,23 +53,25 @@ exports.updateUser = (req, res) => {
 };
 
 exports.userPurchaseList = (req, res) => {
-  Order.find({ user: req.profile._id })
-    .populate("user", "_id name")
+  //store entire list of what user is purchasing
+  Order.find({ user: req.profile._id }) // find user  based on req.profile._id - done by middleware
+    .populate("user", "_id name") // user- model which we want to populate, _id - id name - name
     .exec((err, order) => {
+      //either error or order
       if (err) {
         return res.status(400).json({
           error: "No Order in this account",
         });
       }
-      return res.json(order);
+      return res.json(order); //get all orders from usser
     });
 };
 
-
-exports.pushOrderInPurchaseList = (req, res, next)  =>{   //middleware - so using next
-  
-  let purchases = []
-  req.body.order.products.forEach(product => {
+exports.pushOrderInPurchaseList = (req, res, next) => {
+  //adding in cart
+  //middleware - so using next
+  let purchases = [];
+  req.body.order.products.forEach((product) => {
     purchases.push({
       _id: product._id,
       name: product.name,
@@ -77,24 +79,22 @@ exports.pushOrderInPurchaseList = (req, res, next)  =>{   //middleware - so usin
       category: product.category,
       quantity: product.quantity,
       amount: req.body.order.amount,
-      transaction_id: req.body.order.transaction_id
+      transaction_id: req.body.order.transaction_id,
     });
   });
 
   // Store this in Database
   User.findOneAndUpdate(
-    {_id: req.profile._id},
-    {$push: {purchases: purchases}},
-    {new: true},
-    (err, purchases) =>{
-      if (err){
+    { _id: req.profile._id },
+    { $push: { purchases: purchases } },
+    { new: true },
+    (err, purchases) => {
+      if (err) {
         return res.status(400).json({
-          error: "Unable to save purchase list"
+          error: "Unable to save purchase list",
         });
       }
       next();
     }
-  )
-  
-  
+  );
 };
